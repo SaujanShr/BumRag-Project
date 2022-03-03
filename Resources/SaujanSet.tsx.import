@@ -1,0 +1,20 @@
+[remap]
+
+importer="vnen.tiled_tileset_importer"
+type="TileSet"
+path="res://.import/SaujanSet.tsx-2f2a540043d5c0b74be6bc390e38b9a9.res"
+
+[deps]
+
+source_file="res://Resources/SaujanSet.tsx"
+dest_files=[ "res://.import/SaujanSet.tsx-2f2a540043d5c0b74be6bc390e38b9a9.res" ]
+
+[params]
+
+custom_properties=true
+tile_metadata=false
+image_flags=7
+embed_internal_images=false
+save_tiled_properties=false
+apply_offset=false
+post_import_script=""

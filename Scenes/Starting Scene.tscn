@@ -15,8 +15,11 @@ tile_data = PoolIntArray( -1638368, 18, 0, -1638367, 18, 0, -1638366, 18, 0, -16
 
 [node name="YSort" type="YSort" parent="."]
 
-[node name="StaticBody2D" parent="YSort" instance=ExtResource( 2 )]
-position = Vector2( 490, 320 )
+[node name="House2" parent="YSort" instance=ExtResource( 2 )]
+position = Vector2( 400, 360 )
+
+[node name="House" parent="YSort" instance=ExtResource( 2 )]
+position = Vector2( 480, 320 )
 
 [node name="KinematicBody2D" parent="YSort" instance=ExtResource( 3 )]
-position = Vector2( 460, 350 )
+position = Vector2( 470, 350 )
