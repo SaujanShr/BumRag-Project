@@ -13,8 +13,8 @@ dest_files=[ "res://.import/SaujanSet.tsx-2f2a540043d5c0b74be6bc390e38b9a9.res" 
 
 custom_properties=true
 tile_metadata=false
-image_flags=7
-embed_internal_images=false
+image_flags=0
+embed_internal_images=true
 save_tiled_properties=false
 apply_offset=false
 post_import_script=""
