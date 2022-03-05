@@ -1,14 +1,62 @@
 [gd_scene load_steps=19 format=2]
 
-[ext_resource path="res://Assets/Player Sprite/SE.png" type="Texture" id=1]
-[ext_resource path="res://Scenes/Player.gd" type="Script" id=2]
-[ext_resource path="res://Assets/Player Sprite/NW.png" type="Texture" id=3]
-[ext_resource path="res://Assets/Player Sprite/SW.png" type="Texture" id=4]
-[ext_resource path="res://Assets/Player Sprite/NE.png" type="Texture" id=5]
-[ext_resource path="res://Assets/Player Sprite/E.png" type="Texture" id=6]
-[ext_resource path="res://Assets/Player Sprite/W.png" type="Texture" id=7]
-[ext_resource path="res://Assets/Player Sprite/N.png" type="Texture" id=8]
-[ext_resource path="res://Assets/Player Sprite/S.png" type="Texture" id=9]
+[ext_resource path="res://Assets/Actors/Player Sprite/SE.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Actors/Player Sprite/NW.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Actors/Player Sprite/SW.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Actors/Player Sprite/NE.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Actors/Player Sprite/E.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Actors/Player Sprite/W.png" type="Texture" id=7]
+[ext_resource path="res://Assets/Actors/Player Sprite/N.png" type="Texture" id=8]
+[ext_resource path="res://Assets/Actors/Player Sprite/S.png" type="Texture" id=9]
+
+[sub_resource type="GDScript" id=10]
+script/source = "extends \"res://Scripts/Actors/Actor.gd\"
+
+export var MOVE_SPEED = 200
+var direction = Vector2(0, 0)
+
+func _physics_process(_delta):
+	MovementLoop()
+func _process(_delta):
+	AnimationLoop()
+
+#controls movement
+func MovementLoop():
+	direction.x = int(Input.is_action_pressed(\"move_e\")) - int(Input.is_action_pressed(\"move_w\"))
+	direction.y = (int(Input.is_action_pressed(\"move_s\")) - int(Input.is_action_pressed(\"move_n\"))) / float(2)
+	var motion = direction.normalized() * MOVE_SPEED
+	motion = move_and_slide(motion)
+
+#controls idle/running animations
+func AnimationLoop():
+	var anim_direction = \"S\"
+	var anim_mode = \"Idle\"
+	var animation
+	match direction:
+		Vector2(-1, 0):
+			anim_direction = \"W\"
+		Vector2(1, 0):
+			anim_direction = \"E\"
+		Vector2(0, -0.5):
+			anim_direction = \"N\"
+		Vector2(0, 0.5):
+			anim_direction = \"S\"
+		Vector2(-1, -0.5):
+			anim_direction = \"NW\"
+		Vector2(-1, 0.5):
+			anim_direction = \"SW\"
+		Vector2(1, -0.5):
+			anim_direction = \"NE\"
+		Vector2(1, 0.5):
+			anim_direction = \"SE\"
+	#need to add running animations below
+	if direction != Vector2(0, 0):
+		anim_mode = \"Idle\"
+	else:
+		anim_mode = \"Idle\"
+	animation = anim_mode + \"_\" + anim_direction
+	get_node(\"AnimationPlayer\").play(animation)
+"
 
 [sub_resource type="Animation" id=6]
 resource_name = "Idle_E"
@@ -147,7 +195,7 @@ tracks/0/keys = {
 
 [node name="KinematicBody2D" type="KinematicBody2D"]
 position = Vector2( 0, -10 )
-script = ExtResource( 2 )
+script = SubResource( 10 )
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0.6, -5 )
