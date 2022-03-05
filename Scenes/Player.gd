@@ -38,8 +38,11 @@ func AnimationLoop():
 		Vector2(1, 0.5):
 			anim_direction = "SE"
 	if direction != Vector2(0, 0):
-		anim_mode = "Idle"
+		anim_mode = "Idle" #should be "Walk" but I haven't made that animation yet
 	else:
 		anim_mode = "Idle"
 	animation = anim_mode + "_" + anim_direction
-	get_node("AnimationPlayer").play(animation)
+	$PlayerAnimation.play(animation) #$ is short for get_node()
+
+
+
